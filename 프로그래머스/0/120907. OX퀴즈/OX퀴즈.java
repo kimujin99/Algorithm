@@ -2,27 +2,13 @@ import java.util.*;
 
 class Solution {
     public String[] solution(String[] quiz) {
-        String[] result = new String[quiz.length];
-        
         for(int i = 0; i < quiz.length; i++) {
-            String expression = quiz[i].split(" = ")[0];
-            int originAnswer = Integer.parseInt(quiz[i].split(" = ")[1]);
-            int correctAnswer = 0;
-            
-            if(expression.contains(" + ")) {
-                int x = Integer.parseInt(expression.split(" \\+ ")[0]);
-                int y = Integer.parseInt(expression.split(" \\+ ")[1]);
-                correctAnswer = x + y;
-            } else {
-                int x = Integer.parseInt(expression.split(" \\- ")[0]);
-                int y = Integer.parseInt(expression.split(" \\- ")[1]);
-                correctAnswer = x - y;
-            }
-            
-            if(originAnswer == correctAnswer) result[i] = "O";
-            else result[i] = "X";
-        }
+            String[] arr = quiz[i].split(" ");
+            int result = Integer.parseInt(arr[0]) + Integer.parseInt(arr[2]) * (arr[1].equals("+") ? 1 : -1);
 
-        return result;
+            if (result == Integer.parseInt(arr[4])) quiz[i] = "O";
+            else quiz[i] = "X";
+        }
+        return quiz;
     }
 }
